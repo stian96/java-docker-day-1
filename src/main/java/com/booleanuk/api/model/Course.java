@@ -34,4 +34,12 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
+
+    public Course(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int credits) {
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.credits = credits;
+    }
 }
