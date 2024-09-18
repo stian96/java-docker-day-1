@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -25,27 +26,25 @@ public class Student {
     @Column(name = "date_of_birth")
     private LocalDateTime dateOfBirth;
 
-    @Column(name = "course_title")
-    private String courseTitle;
-
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
     @Column(name = "average_grade")
     private String averageGrade;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Course> courses;
+
     public Student(
             String firstName,
             String lastName,
             LocalDateTime birth,
-            String courseTitle,
             LocalDateTime startDate,
             String averageGrade)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = birth;
-        this.courseTitle = courseTitle;
         this.startDate = startDate;
         this.averageGrade = averageGrade;
     }
