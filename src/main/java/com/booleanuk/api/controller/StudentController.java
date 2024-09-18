@@ -2,6 +2,7 @@ package com.booleanuk.api.controller;
 
 import com.booleanuk.api.model.Student;
 import com.booleanuk.api.repository.StudentRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +36,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> create(@RequestBody Student body) {
+    public ResponseEntity<Student> create(@Valid @RequestBody Student body) {
         Student createdStudent = this.studentRepository.save(body);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Student> update(@PathVariable int id, @RequestBody Student body) {
+    public ResponseEntity<Student> update(@PathVariable int id, @Valid @RequestBody Student body) {
         Student student = this.studentRepository.findById(id).orElse(null);
         if (student == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, NOT_FOUND + id);

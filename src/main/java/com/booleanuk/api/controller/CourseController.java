@@ -3,6 +3,7 @@ import com.booleanuk.api.model.Course;
 import com.booleanuk.api.model.Student;
 import com.booleanuk.api.repository.CourseRepository;
 import com.booleanuk.api.repository.StudentRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> create(@RequestParam int studentId, @RequestBody Course body) {
+    public ResponseEntity<Course> create(@RequestParam int studentId, @Valid @RequestBody Course body) {
         Optional<Student> optionalStudent = this.studentRepository.findById(studentId);
 
         if (optionalStudent.isEmpty()) {
@@ -53,7 +54,7 @@ public class CourseController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Course> update(@PathVariable int id, @RequestBody Course body) {
+    public ResponseEntity<Course> update(@PathVariable int id, @Valid @RequestBody Course body) {
         Course course = this.courseRepository.findById(id).orElse(null);
         if (course == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, NOT_FOUND + id);

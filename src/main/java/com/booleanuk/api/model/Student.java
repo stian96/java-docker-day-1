@@ -2,6 +2,9 @@ package com.booleanuk.api.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,18 +22,28 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
+    @Size(min = 3, max = 20)
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank
+    @Size(min = 3, max = 20)
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "date_of_birth")
     private LocalDateTime dateOfBirth;
 
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
+    @NotNull
+    @Size(max = 1)
     @Column(name = "average_grade")
     private String averageGrade;
 
