@@ -1,10 +1,12 @@
 package com.booleanuk.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -32,7 +34,9 @@ public class Student {
     @Column(name = "average_grade")
     private String averageGrade;
 
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Course> courses;
 
     public Student(
@@ -47,5 +51,6 @@ public class Student {
         this.dateOfBirth = birth;
         this.startDate = startDate;
         this.averageGrade = averageGrade;
+        this.courses = new ArrayList<>();
     }
 }

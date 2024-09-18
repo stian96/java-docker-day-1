@@ -52,7 +52,6 @@ public class StudentController {
         student.setAverageGrade(body.getAverageGrade());
         student.setStartDate(body.getStartDate());
         student.setDateOfBirth(body.getDateOfBirth());
-        student.setCourseTitle(body.getCourseTitle());
         this.studentRepository.save(student);
 
         return new ResponseEntity<>(student, HttpStatus.CREATED);
